@@ -8,8 +8,10 @@ model = keras.models.load_model(fpath)
 
 # 2. Load Data
 testData = idx2numpy.convert_from_file('./MNIST_ORG/t10k-images.idx3-ubyte')
+testLabels = idx2numpy.convert_from_file('./MNIST_ORG/t10k-labels.idx1-ubyte')
 
 # 3. Determine accuracy
+predictions = model.predict(testData)
 matches = np.argmax(predictions, axis=1) == testLabels
 accuracy = np.mean(matches) * 100
 print(f"Testing Accuracy: {accuracy:.2f}%")
